@@ -1,3 +1,4 @@
+import { Element } from "webdriverio";
 import Page from "./page";
 
 /**
@@ -7,26 +8,60 @@ class PhysicianPage extends Page {
   /**
    * define selectors using getter methods
    */
-  public get breadCrumb() {
+
+  /**
+   * Get the doctor's name from the bread crumb section
+   * @returns {Element} The element from bread crumb section that contains doctor's name
+   */
+  public get breadCrumb():Promise<Element> {
     return $('[data-automation="Breadcrumb - PhysicianProfile"]');
   }
 
-  public get physiciansName() {
+  /**
+   * Get the doctor's name from the profile section
+   * @returns {Element} The element from the proflie section that contains doctor's name
+   */
+  public get physiciansName():Promise<Element> {
     return $('[class="text-wrap header__content--title"]');
   }
 
-  public get houseNumberAndStreet() {
+  /**
+   * Get the doctor's street and house number
+   * @returns {Element} The element that has doctor's street and house number
+   */
+  public get houseNumberAndStreet():Promise<Element> {
     return $('[data-automation="Address - Street House"]');
   }
 
-  public get cityAndZIPCode() {
+  /**
+   * Get the doctor's city and zip code
+   * @returns {Element} The element that has doctor's city and zip code
+   */
+  public get cityAndZIPCode():Promise<Element> {
     return $('[data-automation="Address - Postal city code"]');
   }
 
-  public get currentDay() {
+  /**
+   * Get the current day from UI
+   * @returns {Element} The Element that contains the current day in the openning hours section
+   */
+  public get currentDay():Promise<Element> {
     return $('[class="text-day__item--text current-date"]');
   }
+  
+    /**
+   * Get the current day abbreviation from the UI
+   * @returns {string} current day
+   */
+    public get today():Promise<string> {
+      return this.currentDay.getText();
+    }
 
+  /**
+   * Compose the openning hours to be used for comparisons
+   * @param today is the day of the week recieved from UI
+   * @returns {string} the complete opening hours depending on the day of the week
+   */
   public async openingHours(today: string): Promise<string | undefined> {
     switch (today) {
       case "Mo.":
@@ -41,33 +76,46 @@ class PhysicianPage extends Page {
     }
   }
 
-  public get openingTimeInTheMorning() {
+  /**
+   * Get the opening time in the morning
+   * @returns {string} opening time in the morning
+   */
+  public get openingTimeInTheMorning():Promise<string> {
     return $('[class="text-day-hours-container__items current-date ng-star-inserted"]').$('[class="text-day-hour__text-startTime"]').getText();
   }
 
-  public get closingTimeInTheMorning() {
+  /**
+   * Get the closing time in the morning
+   * @returns {string} closing time in the morning
+   */
+  public get closingTimeInTheMorning():Promise<string> {
     return $('[class="text-day-hours-container__items current-date ng-star-inserted"]').$('[class="text-day-hour__text-endTime"]').getText();
   }
 
-  public get openingTimeInTheAfternoon() {
+  /**
+   * Get the openimg time in the afternoon
+   * @returns {string} opening time in the afternoon
+   */
+  public get openingTimeInTheAfternoon():Promise<string> {
     return $('[class="text-day-hour__item ng-star-inserted"]').$('[class="text-day-hour__text-startTime"]').getText();
   }
-
-  public get closingTimeInTheAfternoon() {
+  
+  /**
+   * Get the closing time in the afternoon
+   * @returns {string} closing time in the afternoon
+   */
+  public get closingTimeInTheAfternoon():Promise<string> {
     return $('[class="text-day-hour__item ng-star-inserted"]').$('[class="text-day-hour__text-endTime"]').getText();
   }
 
-  public get today() {
-    return this.currentDay.getText();
-  }
 
-  public get openingHoursExceptWednesday() {
-    return `${this.openingTimeInTheMorning} - ${this.closingTimeInTheMorning} and ${this.openingTimeInTheAfternoon} - ${this.closingTimeInTheAfternoon}`;
-  }
+  //public get openingHoursExceptWednesday() {
+  //  return `${this.openingTimeInTheMorning} - ${this.closingTimeInTheMorning} and ${this.openingTimeInTheAfternoon} - ${this.closingTimeInTheAfternoon}`;
+ // }
 
-  public get openingHoursOnWednesday() {
-    return `${this.openingTimeInTheMorning} - ${this.closingTimeInTheMorning}`;
-  }
+//  public get openingHoursOnWednesday() {
+ //   return `${this.openingTimeInTheMorning} - ${this.closingTimeInTheMorning}`;
+ // }
   //public openingHoursExceptWednesday = `${this.openingTimeInTheMorning} - ${this.closingTimeInTheMorning} and ${this.openingTimeInTheAfternoon} - ${this.closingTimeInTheAfternoon}`;
 
   //public openingHoursOnWednesday = `${this.openingTimeInTheMorning} - ${this.closingTimeOnWednesday}`;
