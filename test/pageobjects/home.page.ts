@@ -13,7 +13,7 @@ class HomePage extends Page {
    * Get Accept Cookies button
    * @returns {WebdriverIO.Element} accept cookies button from cookies window
    */
-  public get acceptCookiesButton():Promise<WebdriverIO.Element> {
+  public get acceptCookiesButton(): Promise<WebdriverIO.Element> {
     return $("button*=Alle akzeptieren");
   }
 
@@ -21,16 +21,20 @@ class HomePage extends Page {
    * Get the searchbox
    * @returns {WebdriverIO.Element} searchbox on the homepage
    */
-  public get searchBox():Promise<WebdriverIO.Element> {
-    return $('input[placeholder="Fachbereich, Name des Arztes, Praxis oder Einrichtung"]');
+  public get searchBox(): Promise<WebdriverIO.Element> {
+    return $(
+      'input[placeholder="Fachbereich, Name des Arztes, Praxis oder Einrichtung"]'
+    );
   }
 
   /**
    * Get the desired doctor from the search results
    * @returns {WebdriverIO.Element} the doctor with the correct location
    */
-  public get drPeterTest():Promise<WebdriverIO.Element> {
-    return $('(//span[.="Peter Test"]/../../following-sibling::div/span[@class="search-card-city ng-star-inserted"])[contains(., "Neuwied")]');
+  public get drPeterTest(): Promise<WebdriverIO.Element> {
+    return $(
+      '(//span[.="Peter Test"]/../../following-sibling::div/span[@class="search-card-city ng-star-inserted"])[contains(., "Neuwied")]'
+    );
   }
 
   /**
@@ -49,10 +53,16 @@ class HomePage extends Page {
   }
   /**
    * Choose the desired doctor among the appeared options
-   * Wait until the search values become visible before clicking 
+   * Wait until the search values become visible before clicking
    */
   public async selectDoctor() {
-    await browser.waitUntil(this.drPeterTest.isDisplayed);
+    await browser.waitUntil(
+      async () => (await this.drPeterTest).isDisplayed(),
+      {
+        timeout: 10000,
+        timeoutMsg: "the doctor you searched for was not found",
+      }
+    );
     (await this.drPeterTest).click();
   }
 }
