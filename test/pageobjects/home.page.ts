@@ -33,15 +33,24 @@ class HomePage extends Page {
     return $('(//span[.="Peter Test"]/../../following-sibling::div/span[@class="search-card-city ng-star-inserted"])[contains(., "Neuwied")]');
   }
 
-
+  /**
+   * Accept cookies
+   */
   public async acceptCookies() {
     (await this.acceptCookiesButton).click();
   }
 
+  /**
+   * insert the desired search term into the seach box
+   * @param searchTerm {string | number} the subject that is desired to be searched
+   */
   public async search(searchTerm: string | number) {
     await (await this.searchBox).addValue(searchTerm);
   }
-  
+  /**
+   * Choose the desired doctor among the appeared options
+   * Wait until the search values become visible before clicking 
+   */
   public async selectDoctor() {
     await browser.waitUntil(this.drPeterTest.isDisplayed);
     (await this.drPeterTest).click();
