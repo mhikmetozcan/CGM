@@ -1,3 +1,4 @@
+import { Element } from "webdriverio";
 import Page from "./page";
 
 /**
@@ -7,28 +8,43 @@ class HomePage extends Page {
   /**
    * define selectors using getter methods
    */
-  public get acceptCookiesButton() {
+
+  /**
+   * Get Accept Cookies button
+   * @returns {WebdriverIO.Element} accept cookies button from cookies window
+   */
+  public get acceptCookiesButton():Promise<WebdriverIO.Element> {
     return $("button*=Alle akzeptieren");
   }
 
-  public get searchBox() {
+  /**
+   * Get the searchbox
+   * @returns {WebdriverIO.Element} searchbox on the homepage
+   */
+  public get searchBox():Promise<WebdriverIO.Element> {
     return $('input[placeholder="Fachbereich, Name des Arztes, Praxis oder Einrichtung"]');
   }
 
-  public get drPeterTest() {
+  /**
+   * Get the desired doctor from the search results
+   * @returns {WebdriverIO.Element} the doctor with the correct location
+   */
+  public get drPeterTest():Promise<WebdriverIO.Element> {
     return $('(//span[.="Peter Test"]/../../following-sibling::div/span[@class="search-card-city ng-star-inserted"])[contains(., "Neuwied")]');
   }
+
+
   public async acceptCookies() {
     (await this.acceptCookiesButton).click();
   }
 
   public async search(searchTerm: string | number) {
-    await this.searchBox.addValue(searchTerm);
+    await (await this.searchBox).addValue(searchTerm);
   }
-
+  
   public async selectDoctor() {
-    await browser.waitUntil(this.drPeterTest?.isDisplayed);
-    await this.drPeterTest?.click();
+    await browser.waitUntil(this.drPeterTest.isDisplayed);
+    (await this.drPeterTest).click();
   }
 }
 

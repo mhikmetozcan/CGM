@@ -24,10 +24,10 @@ describe('Verify Dr. Peter Test', () => {
      const openingHoursExceptWednesday = `${await physicianPage.openingTimeInTheMorning} - ${await physicianPage.closingTimeInTheMorning} and ${await physicianPage.openingTimeInTheAfternoon} - ${await physicianPage.closingTimeInTheAfternoon}`;
      const openingHoursOnWednesday = `${await physicianPage.openingTimeInTheMorning} - ${await physicianPage.closingTimeInTheMorning}`;
 
-      if(await physicianPage.today === 'Mi.'){
-        await expect(openingHoursOnWednesday).toBe(await physicianPage.openingHours(await physicianPage.today));
+      if(await physicianPage.today() === 'Mi.'){
+        await expect(openingHoursOnWednesday).toBe(await physicianPage.openingHours(await physicianPage.today()));
       }else{
-        await expect(openingHoursExceptWednesday).toBe(await physicianPage.openingHours(await physicianPage.today));
+        await expect(openingHoursExceptWednesday).toBe(await physicianPage.openingHours(await physicianPage.today()));
       }
     
     })

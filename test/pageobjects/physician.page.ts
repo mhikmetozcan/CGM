@@ -11,41 +11,41 @@ class PhysicianPage extends Page {
 
   /**
    * Get the doctor's name from the bread crumb section
-   * @returns {Element} The element from bread crumb section that contains doctor's name
+   * @returns {WebdriverIO.Element} The element from bread crumb section that contains doctor's name
    */
-  public get breadCrumb():Promise<Element> {
+  public get breadCrumb():Promise<WebdriverIO.Element> {
     return $('[data-automation="Breadcrumb - PhysicianProfile"]');
   }
 
   /**
    * Get the doctor's name from the profile section
-   * @returns {Element} The element from the proflie section that contains doctor's name
+   * @returns {WebdriverIO.Element} The element from the proflie section that contains doctor's name
    */
-  public get physiciansName():Promise<Element> {
+  public get physiciansName():Promise<WebdriverIO.Element> {
     return $('[class="text-wrap header__content--title"]');
   }
 
   /**
    * Get the doctor's street and house number
-   * @returns {Element} The element that has doctor's street and house number
+   * @returns {WebdriverIO.Element} The element that has doctor's street and house number
    */
-  public get houseNumberAndStreet():Promise<Element> {
+  public get houseNumberAndStreet():Promise<WebdriverIO.Element> {
     return $('[data-automation="Address - Street House"]');
   }
 
   /**
    * Get the doctor's city and zip code
-   * @returns {Element} The element that has doctor's city and zip code
+   * @returns {WebdriverIO.Element} The element that has doctor's city and zip code
    */
-  public get cityAndZIPCode():Promise<Element> {
+  public get cityAndZIPCode():Promise<WebdriverIO.Element> {
     return $('[data-automation="Address - Postal city code"]');
   }
 
   /**
    * Get the current day from UI
-   * @returns {Element} The Element that contains the current day in the openning hours section
+   * @returns {WebdriverIO.Element} The Element that contains the current day in the openning hours section
    */
-  public get currentDay():Promise<Element> {
+  public get currentDay():Promise<WebdriverIO.Element> {
     return $('[class="text-day__item--text current-date"]');
   }
   
@@ -53,8 +53,8 @@ class PhysicianPage extends Page {
    * Get the current day abbreviation from the UI
    * @returns {string} current day
    */
-    public get today():Promise<string> {
-      return this.currentDay.getText();
+    public async today():Promise<string> {
+      return (await this.currentDay).getText();
     }
 
   /**
