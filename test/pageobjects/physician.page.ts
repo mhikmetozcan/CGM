@@ -1,13 +1,16 @@
-import { Element } from "webdriverio";
 import Page from "./page";
 
 /**
  * sub page containing specific selectors and methods for a specific page
  */
-class PhysicianPage extends Page {
-  /**
-   * define selectors using getter methods
+export default class PhysicianPage extends Page {
+
+    /**
+   * get method for factory design pattern
    */
+    public static get() {
+      return new PhysicianPage();
+    }
 
   /**
    * Get the doctor's name from the bread crumb section
@@ -108,17 +111,4 @@ class PhysicianPage extends Page {
     return $('[class="text-day-hour__item ng-star-inserted"]').$('[class="text-day-hour__text-endTime"]').getText();
   }
 
-
-  //public get openingHoursExceptWednesday() {
-  //  return `${this.openingTimeInTheMorning} - ${this.closingTimeInTheMorning} and ${this.openingTimeInTheAfternoon} - ${this.closingTimeInTheAfternoon}`;
- // }
-
-//  public get openingHoursOnWednesday() {
- //   return `${this.openingTimeInTheMorning} - ${this.closingTimeInTheMorning}`;
- // }
-  //public openingHoursExceptWednesday = `${this.openingTimeInTheMorning} - ${this.closingTimeInTheMorning} and ${this.openingTimeInTheAfternoon} - ${this.closingTimeInTheAfternoon}`;
-
-  //public openingHoursOnWednesday = `${this.openingTimeInTheMorning} - ${this.closingTimeOnWednesday}`;
 }
-
-export default new PhysicianPage();

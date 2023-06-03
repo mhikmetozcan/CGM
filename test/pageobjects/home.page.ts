@@ -1,21 +1,16 @@
-import { Element } from "webdriverio";
 import Page from "./page";
 
 /**
  * sub page containing specific selectors and methods for a specific page
  */
-class HomePage extends Page {
-  /**
-   * define selectors using getter methods
-   */
+export default class HomePage extends Page {
 
-  /**
-   * Get Accept Cookies button
-   * @returns {WebdriverIO.Element} accept cookies button from cookies window
+    /**
+   * get method for factory design pattern
    */
-  public get acceptCookiesButton(): Promise<WebdriverIO.Element> {
-    return $("button*=Alle akzeptieren");
-  }
+    public static get() {
+      return new HomePage();
+    }
 
   /**
    * Get the searchbox
@@ -37,12 +32,6 @@ class HomePage extends Page {
     );
   }
 
-  /**
-   * Accept cookies
-   */
-  public async acceptCookies() {
-    (await this.acceptCookiesButton).click();
-  }
 
   /**
    * insert the desired search term into the seach box
@@ -59,12 +48,10 @@ class HomePage extends Page {
     await browser.waitUntil(
       async () => (await this.drPeterTest).isDisplayed(),
       {
-        timeout: 10000,
+        timeout: 20000,
         timeoutMsg: "the doctor you searched for was not found",
       }
     );
     (await this.drPeterTest).click();
   }
 }
-
-export default new HomePage();
