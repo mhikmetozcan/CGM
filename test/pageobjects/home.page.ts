@@ -1,5 +1,10 @@
 import Page from "./page";
 
+enum doctor{
+  name='Peter Test',
+  city='Neuwied'
+}
+
 /**
  * sub page containing specific selectors and methods for a specific page
  */
@@ -26,9 +31,9 @@ export default class HomePage extends Page {
    * Get the desired doctor from the search results
    * @returns {WebdriverIO.Element} the doctor with the correct location
    */
-  public get drPeterTest(): Promise<WebdriverIO.Element> {
+  public get doctorWithCity(): Promise<WebdriverIO.Element> {
     return $(
-      '(//span[.="Peter Test"]/../../following-sibling::div/span[@class="search-card-city ng-star-inserted"])[contains(., "Neuwied")]'
+      `(//span[.='${doctor.name}']/../../following-sibling::div/span[@class="search-card-city ng-star-inserted"])[contains(., '${doctor.city}')]`
     );
   }
 
@@ -45,12 +50,12 @@ export default class HomePage extends Page {
    */
   public async selectDoctor() {
     await browser.waitUntil(
-      async () => (await this.drPeterTest).isDisplayed(),
+      async () => (await this.doctorWithCity).isDisplayed(),
       {
         timeout: 20000,
         timeoutMsg: "the doctor you searched for was not found",
       }
     );
-    this.click(await this.drPeterTest);
+    this.click(await this.doctorWithCity);
   }
 }
