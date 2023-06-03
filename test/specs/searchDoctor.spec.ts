@@ -32,7 +32,7 @@ describe('Verify Dr. Peter Test', () => {
       await expect(PHYSICIAN.cityAndZIPCode).toHaveText(`${doctor.zip} ${doctor.city}`);
     });
 
-    xit('should validate the opening hours', async () => {
+    it('should validate the opening hours', async () => {
      const OPENING_HOURS_EXCEPT_WED = `${await PHYSICIAN.openingTimeInTheMorning} - ${await PHYSICIAN.closingTimeInTheMorning} and ${await PHYSICIAN.openingTimeInTheAfternoon} - ${await PHYSICIAN.closingTimeInTheAfternoon}`;
      const OPENING_HOURS_ON_WED = `${await PHYSICIAN.openingTimeInTheMorning} - ${await PHYSICIAN.closingTimeInTheMorning}`;
 
