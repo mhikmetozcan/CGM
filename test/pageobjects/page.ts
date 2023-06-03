@@ -57,7 +57,7 @@ export default class Page {
   /**
    * select an element relative to a parent element or the DOM root if travel necessary
    * @param selector
-   * @param parent parent elemtn
+   * @param parent parent element
    * @returns {WebdriverIO.Element} the element that is targeted
    */
   private el(selector: WebdriverIO.Element, parent?: WebdriverIO.Element): WebdriverIO.Element {
