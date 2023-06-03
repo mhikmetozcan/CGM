@@ -32,13 +32,12 @@ export default class HomePage extends Page {
     );
   }
 
-
   /**
    * insert the desired search term into the seach box
    * @param searchTerm {string | number} the subject that is desired to be searched
    */
   public async search(searchTerm: string | number) {
-    await (await this.searchBox).addValue(searchTerm);
+    await this.setInputValue(searchTerm, await this.searchBox);
   }
   /**
    * Choose the desired doctor among the appeared options
@@ -52,6 +51,6 @@ export default class HomePage extends Page {
         timeoutMsg: "the doctor you searched for was not found",
       }
     );
-    (await this.drPeterTest).click();
+    this.click(await this.drPeterTest);
   }
 }

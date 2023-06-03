@@ -57,7 +57,7 @@ export default class PhysicianPage extends Page {
    * @returns {string} current day
    */
     public async today():Promise<string> {
-      return (await this.currentDay).getText();
+      return this.getText(await this.currentDay);
     }
 
   /**

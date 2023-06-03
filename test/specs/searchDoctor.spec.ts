@@ -16,8 +16,6 @@ enum doctor {
 describe('Verify Dr. Peter Test', () => {
 
   before('Navigate to Dr. Test\'s personal page', async () => {
-
-    
     await browser.url('/');
     await COOKIES.acceptCookies();
     await HOME_PAGE.search(SEARCH_TERM);
