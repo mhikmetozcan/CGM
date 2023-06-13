@@ -45,19 +45,5 @@ export default class HomePage extends Page {
   public async search(searchTerm: string | number) {
     await this.setInputValue(searchTerm, await this.searchBox);
   }
-  
-  /**
-   * Choose the desired doctor among the appeared options
-   * Wait until the search values become visible before clicking
-   */
-  public async selectDoctor() {
-    await browser.waitUntil(
-      async () => (await this.doctorWithCity).isDisplayed(),
-      {
-        timeout: 20000,
-        timeoutMsg: "the doctor you searched for was not found",
-      }
-    );
-    this.click(await this.doctorWithCity);
-  }
+
 }

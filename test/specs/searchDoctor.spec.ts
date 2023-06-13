@@ -19,7 +19,7 @@ describe('Verify Dr. Peter Test', () => {
     await browser.url('/');
     await COOKIES.acceptCookies();
     await HOME_PAGE.search(SEARCH_TERM);
-    await HOME_PAGE.selectDoctor();
+    await HOME_PAGE.click(await HOME_PAGE.doctorWithCity);
   });
 
     it('should validate the doctors name', async () => {
@@ -36,10 +36,10 @@ describe('Verify Dr. Peter Test', () => {
      const OPENING_HOURS_EXCEPT_WED = `${await PHYSICIAN.openingTimeInTheMorning} - ${await PHYSICIAN.closingTimeInTheMorning} and ${await PHYSICIAN.openingTimeInTheAfternoon} - ${await PHYSICIAN.closingTimeInTheAfternoon}`;
      const OPENING_HOURS_ON_WED = `${await PHYSICIAN.openingTimeInTheMorning} - ${await PHYSICIAN.closingTimeInTheMorning}`;
 
-      if(await PHYSICIAN.today() === 'Mi.'){
-        await expect(OPENING_HOURS_ON_WED).toBe(await PHYSICIAN.openingHours(await PHYSICIAN.today()));
+      if(await PHYSICIAN.getText(await PHYSICIAN.currentDay) === 'Mi.'){
+        await expect(OPENING_HOURS_ON_WED).toBe(await PHYSICIAN.openingHours(await PHYSICIAN.getText(await PHYSICIAN.currentDay)));
       }else{
-        await expect(OPENING_HOURS_EXCEPT_WED).toBe(await PHYSICIAN.openingHours(await PHYSICIAN.today()));
+        await expect(OPENING_HOURS_EXCEPT_WED).toBe(await PHYSICIAN.openingHours(await PHYSICIAN.getText(await PHYSICIAN.currentDay)));
       }
     
     })

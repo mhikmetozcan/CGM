@@ -51,14 +51,6 @@ export default class PhysicianPage extends Page {
   public get currentDay():Promise<WebdriverIO.Element> {
     return $('[class="text-day__item--text current-date"]');
   }
-  
-    /**
-   * Get the current day abbreviation from the UI
-   * @returns {string} current day
-   */
-    public async today():Promise<string> {
-      return this.getText(await this.currentDay);
-    }
 
   /**
    * Compose the openning hours to be used for comparisons
