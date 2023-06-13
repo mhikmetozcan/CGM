@@ -61,6 +61,7 @@ export default class Page {
    * @returns {WebdriverIO.Element} the element that is targeted
    */
   private el(selector: WebdriverIO.Element, parent?: WebdriverIO.Element): WebdriverIO.Element {
-    return parent ? parent.selector : selector;
+    //return parent ? parent.selector : selector;
+    return selector;
   }
 }

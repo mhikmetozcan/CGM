@@ -44,6 +44,7 @@ export default class HomePage extends Page {
   public async search(searchTerm: string | number) {
     await this.setInputValue(searchTerm, await this.searchBox);
   }
+  
   /**
    * Choose the desired doctor among the appeared options
    * Wait until the search values become visible before clicking
