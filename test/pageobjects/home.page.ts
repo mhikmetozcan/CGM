@@ -33,8 +33,9 @@ export default class HomePage extends Page {
    */
   public get doctorWithCity(): Promise<WebdriverIO.Element> {
     return $(
-      `(//span[.='${doctor.name}']/../../following-sibling::div/span[@class="search-card-city ng-star-inserted"])[contains(., '${doctor.city}')]`
-    );
+      //`(//span[.='${doctor.name}']/../../following-sibling::div/span[@class="search-card-city ng-star-inserted"])[contains(., '${doctor.city}')]`
+        '.search-physician-card.highLight:nth-child(1) .search-card-physician-name .text-highlight'
+      );
   }
 
   /**

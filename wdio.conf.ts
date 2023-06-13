@@ -1,5 +1,4 @@
 import type { Options } from '@wdio/types'
-import allureReporter from '@wdio/allure-reporter'
 
 const allure = require('allure-commandline');
 

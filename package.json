@@ -25,6 +25,7 @@
     "wdio-chromedriver-service": "^8.1.1"
   },
   "dependencies": {
-    "allure-commandline": "^2.22.1"
+    "allure-commandline": "^2.22.1",
+    "mocha-allure-reporter": "^1.4.0"
   }
 }
