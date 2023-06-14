@@ -70,6 +70,21 @@ export default class PhysicianPage extends Page {
         return undefined;
     }
   }
+  /**
+   * Get the open hours from UI for Wednesday for comparison 
+   * @returns {string} open hours on Wednesday
+   */
+  public async openingHoursOnWednesday(): Promise<string> {
+    return `${await this.openingTimeInTheMorning} - ${await this.closingTimeInTheMorning}`;
+  }
+
+  /**
+   * Get the open hours from UI for the days of the week except for Wednesday for comparison
+   * @returns open hours except for Wednesday
+   */
+  public async openingHoursExceptWednesday(): Promise<string> {
+    return `${ await this.openingTimeInTheMorning} - ${ await this.closingTimeInTheMorning} and ${ await this.openingTimeInTheAfternoon} - ${ await this.closingTimeInTheAfternoon}`;
+  }
 
   /**
    * Get the opening time in the morning

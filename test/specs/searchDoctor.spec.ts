@@ -33,15 +33,13 @@ describe('Verify Dr. Peter Test', () => {
     });
 
     it('should validate the opening hours', async () => {
-     const OPENING_HOURS_EXCEPT_WED = `${await PHYSICIAN.openingTimeInTheMorning} - ${await PHYSICIAN.closingTimeInTheMorning} and ${await PHYSICIAN.openingTimeInTheAfternoon} - ${await PHYSICIAN.closingTimeInTheAfternoon}`;
-     const OPENING_HOURS_ON_WED = `${await PHYSICIAN.openingTimeInTheMorning} - ${await PHYSICIAN.closingTimeInTheMorning}`;
-
+      const OPENING_HOURS_ON_WED = await PHYSICIAN.openingHoursOnWednesday();
+      const OPENING_HOURS_EXCEPT_WED = await PHYSICIAN.openingHoursExceptWednesday();
       if(await PHYSICIAN.getText(await PHYSICIAN.currentDay) === 'Mi.'){
         await expect(OPENING_HOURS_ON_WED).toBe(await PHYSICIAN.openingHours(await PHYSICIAN.getText(await PHYSICIAN.currentDay)));
       }else{
         await expect(OPENING_HOURS_EXCEPT_WED).toBe(await PHYSICIAN.openingHours(await PHYSICIAN.getText(await PHYSICIAN.currentDay)));
       }
-    
     })
     
 });

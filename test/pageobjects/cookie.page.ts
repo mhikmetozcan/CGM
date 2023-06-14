@@ -27,5 +27,3 @@ export default class CookiePage extends Page {
     (await this.acceptCookiesButton).click();
   }
 }
-
-//export default new CookiePage();
