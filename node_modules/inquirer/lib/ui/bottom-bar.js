@@ -2,9 +2,9 @@
  * Sticky bottom bar user interface
  */
 
-import through from 'through';
-import Base from './baseUI.js';
+import through from '@ljharb/through';
 import * as rlUtils from '../utils/readline.js';
+import Base from './baseUI.js';
 
 export default class BottomBar extends Base {
   constructor(opt = {}) {
