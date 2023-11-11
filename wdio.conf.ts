@@ -1,6 +1,14 @@
 import type { Options } from '@wdio/types'
 
 const allure = require('allure-commandline');
+const isLinux = process.platform === 'linux';
+const isMacOs = process.platform === 'darwin';
+let capabilitiesOptions: string[];
+if (isMacOs) {
+    capabilitiesOptions = ['--log-level=3', '--headless=new', '--window-size=1920,1080'];
+} else {
+    capabilitiesOptions = ['--headless=new', '--disable-gpu', '--log-level=3', '--start-maximized', '--window-size=1920,1080'];
+}
 
 export const config: Options.Testrunner = {
     //
@@ -65,7 +73,12 @@ export const config: Options.Testrunner = {
     //
     capabilities: [{
         // capabilities for local browser web tests
-        browserName: 'chrome' // or "firefox", "microsoftedge", "safari"
+        browserName: 'chrome', // or "firefox", "microsoftedge", "safari",
+        'goog:chromeOptions': {
+            // to run chrome headless the following flags are required
+            // (see https://developers.google.com/web/updates/2017/04/headless-chrome)
+            args: capabilitiesOptions,
+        }
     }],
     //
     // ===================
